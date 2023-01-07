@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Hero } from '../hero';
 
 // @Component is a decorator function that specifies the Angular metadata for the component.
 @Component({
@@ -10,5 +11,8 @@ import { Component } from '@angular/core';
 
 // Always export the component class so you can import it elsewhere … like in the AppModule.
 export class HeroesComponent {
-  hero = "Windstorm"
+  hero : Hero = {
+    id: 1,
+    name: "Windstorm"
+  }
 }
