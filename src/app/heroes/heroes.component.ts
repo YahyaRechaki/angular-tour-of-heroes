@@ -14,7 +14,7 @@ import { Hero } from '../hero';
 export class HeroesComponent {
   heroes = HEROES
   chosenHero: any;
-  selectedHero?: Hero; // the "?" means that the selectedHero property may or may not have a value of type Hero. and if it does have a value, all of the properties in the Hero interface must be present and have the correct types.
+  selectedHero ?: Hero; // the "?" means that the selectedHero property may or may not have a value of type Hero. and if it does have a value, all of the properties in the Hero interface must be present and have the correct types.
 
   onSelect(hero: any): void{
     this.selectedHero = hero
