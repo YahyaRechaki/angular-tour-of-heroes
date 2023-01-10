@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import {HEROES} from '../mock-heroes'
+import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
+import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
 
 // @Component is a decorator function that specifies the Angular metadata for the component.
 @Component({
@@ -11,12 +13,26 @@ import { Hero } from '../hero';
 })
 
 // Always export the component class so you can import it elsewhere … like in the AppModule.
-export class HeroesComponent {
-  heroes = HEROES
-  chosenHero: any;
+export class HeroesComponent implements OnInit {
+
   selectedHero ?: Hero; // the "?" means that the selectedHero property may or may not have a value of type Hero. and if it does have a value, all of the properties in the Hero interface must be present and have the correct types.
 
-  onSelect(hero: any): void{
-    this.selectedHero = hero
+  heroes: Hero[] = [];
+
+  constructor(private heroService: HeroService, private messageService: MessageService) {}
+
+  ngOnInit(): void {
+    this.getHeroes()
   }
+
+  onSelect(hero: Hero): void{
+    this.selectedHero = hero
+    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`)
+  }
+
+  getHeroes(): void {
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes)
+  }
+
 }
